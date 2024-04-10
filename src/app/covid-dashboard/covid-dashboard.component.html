@@ -1,0 +1,82 @@
+<!-- Estadísticas Globales de COVID-19 -->
+<div *ngIf="globalData" class="mt-8 p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-xl font-bold mb-4">Estadísticas Globales de COVID-19</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Ejemplo de iconos en el HTML -->
+    <div class="bg-blue-200 p-4 rounded-lg">
+      <p class="text-blue-800 font-semibold">
+        <i class="fas fa-globe"></i> Casos Totales
+      </p>
+      <p class="text-2xl">{{ globalData.cases | number }}</p>
+    </div>
+
+    <div class="bg-green-200 p-4 rounded-lg">
+      <p class="text-green-800 font-semibold">
+        <i class="fas fa-heartbeat"></i> Recuperaciones
+      </p>
+      <p class="text-2xl">{{ globalData.recovered | number }}</p>
+    </div>
+
+    <div class="bg-red-200 p-4 rounded-lg">
+      <p class="text-red-800 font-semibold">
+        <i class="fas fa-skull-crossbones"></i> Muertes
+      </p>
+      <p class="text-2xl">{{ globalData.deaths | number }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Estadísticas de COVID-19 por País -->
+<div *ngIf="countryData" class="mt-8 p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-xl font-bold mb-4">Estadísticas de COVID-19 por País</h2>
+
+  <!-- Desplegable para seleccionar el país -->
+  <div class="mb-4">
+    <label for="countrySelect" class="text-sm font-semibold"
+      >Selecciona un País:</label
+    >
+    <select
+      id="countrySelect"
+      class="block w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-400"
+      [(ngModel)]="selectedCountry"
+      (change)="onCountryChange()"
+    >
+      <option value="">Seleccionar País</option>
+      <option *ngFor="let country of countries" [value]="country.country">
+        {{ country.country }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Mostrar las estadísticas del país seleccionado -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-blue-200 p-4 rounded-lg">
+      <p class="text-blue-800 font-semibold">País</p>
+      <p class="text-lg">{{ countryData.country }}</p>
+    </div>
+    <!-- Ejemplo de iconos en el HTML -->
+    <div class="bg-blue-200 p-4 rounded-lg">
+      <p class="text-blue-800 font-semibold">
+        <i class="fas fa-globe"></i> Casos Totales
+      </p>
+      <p class="text-2xl">{{ countryData.cases | number }}</p>
+    </div>
+
+    <div class="bg-green-200 p-4 rounded-lg">
+      <p class="text-green-800 font-semibold">
+        <i class="fas fa-heartbeat"></i> Recuperaciones
+      </p>
+      <p class="text-2xl">{{ countryData.recovered | number }}</p>
+    </div>
+
+    <div class="bg-red-200 p-4 rounded-lg">
+      <p class="text-red-800 font-semibold">
+        <i class="fas fa-skull-crossbones"></i> Muertes
+      </p>
+      <p class="text-2xl">{{ countryData.deaths | number }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Componente de Gráficos de COVID-19 -->
+<app-covid-charts class="mt-8"></app-covid-charts>
